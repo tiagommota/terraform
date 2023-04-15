@@ -1,3 +1,3 @@
-do_token     = "dop_v1_091d13cb960606d6221e7ee00bc76e2b20d7c2591f3485c4c97bb80b1ff9664e"
+do_token     = "dop_v1_6dedf489e4bd01b95db952870e79fb359c64444de7316ab345f1b43cf0496300"
 ssh_key_name = "curso fabricio veronez"
 region       = "nyc1"
