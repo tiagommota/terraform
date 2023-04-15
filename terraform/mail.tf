@@ -1,4 +1,4 @@
-# https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs
+
 terraform {
   required_providers {
     digitalocean = {
@@ -13,7 +13,6 @@ provider "digitalocean" {
   token = var.do_token
 }
 
-# https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/droplet
 # Create a new Web Droplet in the nyc2 region
 resource "digitalocean_droplet" "jenkins" {
   image    = "ubuntu-22-04-x64"
@@ -22,13 +21,10 @@ resource "digitalocean_droplet" "jenkins" {
   size     = "s-2vcpu-2gb"
   ssh_keys = [data.digitalocean_ssh_key.ssh_key_name.id]
 }
-# https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/data-sources/ssh_key
 data "digitalocean_ssh_key" "ssh_key_name" {
   name = var.ssh_key_name
 }
 
-# https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_cluster
-# https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_node_pool
 resource "digitalocean_kubernetes_cluster" "k8s" {
   name   = "k8s"
   region = var.region
@@ -42,7 +38,6 @@ resource "digitalocean_kubernetes_cluster" "k8s" {
   }
 }
 
-# 
 variable "do_token" {
   default = ""
 }
@@ -55,11 +50,10 @@ variable "region" {
   default = ""
 }
 
-# https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/droplet
 output "jenkins_ip" {
     value = digitalocean_droplet.jenkins.ipv4_address
 }
-# https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file
+
 resource "local_file" "foo" {
   content  = digitalocean_kubernetes_cluster.k8s.kube_config.0.raw_config
   filename = "kube_config.yaml"
